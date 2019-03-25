@@ -1,0 +1,35 @@
+#Start
+minikube dashboard
+
+minikube ssh 'docker images'
+
+kubectl create -f .
+sleep 10
+kubectl get service webserver
+kubectl get deployment webserver
+kubectl get replicasets
+kubectl get pods
+
+kubectl describe service webserver
+kubectl describe deployment webserver
+kubectl describe replicasets webserver
+kubectl describe pods webserver
+
+kubectl scale deployment webserver --replicas=10
+
+minikube service webserver
+
+watch "kubectl get pods -o=jsonpath='{range .items[*]}{\"\n\"}{.metadata.name}{\":\t\"}{range .spec.containers[*]}{.image}{\", \"}{end}{end}' | sort"
+
+kubectl set image deployment/webserver webserver=webserver:0.1.0
+#Update service
+eval $(minikube docker-env)
+docker build -t webserver:0.1.0 .
+
+
+# monkey see
+minikube service webserver
+
+#delete
+kubectl delete service webserver
+kubectl delete deployment webserver

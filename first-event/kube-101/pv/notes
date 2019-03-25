@@ -1,0 +1,2 @@
+kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
+mysql -u root -h 192.168.99.102 -ppassword < world.sql

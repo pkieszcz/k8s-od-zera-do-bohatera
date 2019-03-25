@@ -1,0 +1,28 @@
+docker run -it -v /data --name container1 busybox
+
+cd data
+touch file1.txt
+ls
+
+exit
+
+docker restart container1
+
+docker attach container1
+
+docker rm container1
+
+docker run -it --name container1 -v /Users:/datavol busybox
+
+
+#volumes-from
+docker run -it -v /data --name container1 busybox
+
+cd data
+touch file1.txt
+touch file2.txt
+
+docker ps
+docker exec container1 ls /data
+
+docker run -it --volumes-from container1 --name container2 busybox

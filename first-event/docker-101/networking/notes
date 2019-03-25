@@ -1,0 +1,21 @@
+docker run -d -p 8080:80 --name web-server nginx
+
+docker run -d --name redis1 redis
+
+docker run -it --link redis1:redis --name redisclient1 busybox
+cat /etc/hosts
+ping redis
+
+set
+
+#change container
+docker run -it --rm --link redis1:redis --name client1 redis sh
+redis-cli -h redis
+
+ping
+set myvar DOCKER
+get myvar
+
+#check from other conatiner
+docker run -it --rm --link redis1:redis --name client2 redis sh
+redis-cli -h redis
