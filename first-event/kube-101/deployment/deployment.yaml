@@ -15,3 +15,13 @@ spec:
          ports:
          - name: http
            containerPort: 80
+         readinessProbe:
+           tcpSocket:
+             port: http
+           initialDelaySeconds: 10
+           periodSeconds: 10
+         livenessProbe:
+           tcpSocket:
+             port: http
+           initialDelaySeconds: 10
+           periodSeconds: 10
